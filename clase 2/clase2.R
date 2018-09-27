@@ -57,6 +57,7 @@ print(suma2)
 add_asigned = add
 add_asigned(3,5)
 
+
 #'Online' functions ('lambda') #ÚTILES PARA APPLY
 function(x,y) {x+y}
 (function(x,y) {x+y})(3,5)
@@ -265,7 +266,7 @@ vapply(x_list, add, character(1))
 
 #mapply: apply a function to multiple list or vector arguments
 args(mapply)
-
+args(add)
 add_multiple = mapply(add, x = c(1:10), y = (1:10)) 
 str(add_multiple)
 
@@ -442,15 +443,16 @@ args(lp)
 # 13x + 19y <= 2400
 # 20x + 29y <= 2100
 # x >= 10
-# x,y >= 0
+# x >= 0
+# y >= 0
 #
 #solution: x=10, y=65.52 with the value of the objective function being 1866.5
 
 f.obj = c(17.1667, 25.8667)
-f.con = matrix (c(13, 19, 20, 29, 1, 0, 1, 1), ncol=2, byrow=TRUE)
+f.con = matrix (c(13, 19, 20, 29, 1, 0, 1, 0, 0, 1), ncol=2, byrow=TRUE)
 print(f.con)
-f.dir = c("<=", "<=", '>=', '>=')
-f.rhs = c(2400, 2100, 10, 0)
+f.dir = c("<=", "<=", '>=', '>=', '>=')
+f.rhs = c(2400, 2100, 10, 0, 0)
 
 result = lp("max", f.obj, f.con, f.dir, f.rhs)
 
@@ -475,16 +477,17 @@ rm(result) #remove from global environment
 #   
 # −2x + 2y ≥ 1 
 # −8x + 10y ≤ 13
-# x, y ≥ 0
+# x ≥ 0
+# y ≥ 0
 # x, y ∈ Z
 #
 #solution: x=1, y=2 with the value of the objective function being 3
 
 f.obj = c(1, 1)
-f.con = matrix (c(-2, 2, -8, 10, 1, 1), ncol=2, byrow=TRUE)
+f.con = matrix (c(-2, 2, -8, 10, 1, 0, 0, 1), ncol=2, byrow=TRUE)
 print(f.con)
-f.dir = c(">=", "<=", '>=')
-f.rhs = c(1, 13, 0)
+f.dir = c(">=", "<=", '>=', '>=')
+f.rhs = c(1, 13, 0, 0)
 f.int_vector = c(1,2)  #indice de variables enteras
 
 result = lp("max", f.obj, f.con, f.dir, f.rhs, int.vec = f.int_vector)
