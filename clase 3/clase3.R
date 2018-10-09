@@ -522,8 +522,9 @@ rm(data); rm(data_unite); rm(data_separate)
 #APLICACIÓN:
 head(iris)
 str(iris)
-
+View(iris)
 #Cual es la especie que tiene el largo promedio mayor (tanto en Sepal como Petal)??
+
 iris %>% 
   as_data_frame() %>%
   gather(type, value, -Species) %>%
